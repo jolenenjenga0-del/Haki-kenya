@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Shortlists - Haki Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-green-700 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold"><i class="fas fa-balance-scale mr-2"></i>Haki Kenya</a>
+      <div class="space-x-4">
+        <a href="/" class="hover:text-green-200">Home</a>
+        <a href="/public/shortlist" class="font-bold">Public Shortlists</a>
+        <% if (user) { %><a href="/dashboard" class="hover:text-green-200">Dashboard</a><% } else { %><a href="/login" class="hover:text-green-200">Login</a><% } %>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-green-800">
+        <i class="fas fa-eye mr-2"></i>Transparent Public Shortlists
+      </h1>
+      <p class="text-gray-600 mt-2">Every shortlisted candidate is displayed publicly with the criteria used. Tamper-proof and verifiable.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow mb-8">
+      <h2 class="font-bold mb-4">Select a Position</h2>
+      <% if (jobs.length === 0) { %>
+        <p class="text-gray-500">No shortlists have been published yet.</p>
+      <% } else { %>
+        <div class="flex flex-wrap gap-2">
+          <% jobs.forEach(j => { %>
+          <a href="?job_id=<%= j.id %>" class="<%= selectedJobId == j.id ? 'bg-green-700 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %> px-4 py-2 rounded-lg text-sm font-semibold transition">
+            <%= j.title %> — <%= j.department %>
+          </a>
+          <% }); %>
+        </div>
+      <% } %>
+    </div>
+
+    <% if (currentJob) { %>
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h2 class="text-xl font-bold mb-2"><%= currentJob.job_title %></h2>
+      <p class="text-gray-500 text-sm mb-4"><%= currentJob.department %></p>
+
+      <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6">
+        <p class="text-sm text-green-800">
+          <i class="fas fa-shield-alt mr-2"></i>
+          <strong>Verification:</strong> All entries below are timestamped and hash-verified. Anyone can verify the integrity of this shortlist.
+        </p>
+      </div>
+
+      <% if (entries.length === 0) { %>
+        <p class="text-gray-500 text-center py-8">No shortlisted candidates yet.</p>
+      <% } else { %>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b-2 border-gray-200">
+              <th class="pb-3 px-2">Rank</th>
+              <th class="pb-3 px-2">Candidate Code</th>
+              <th class="pb-3 px-2">AI Score</th>
+              <th class="pb-3 px-2">Criteria Used</th>
+              <th class="pb-3 px-2">Reason</th>
+              <th class="pb-3 px-2">Date</th>
+              <th class="pb-3 px-2">Verification Hash</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% entries.forEach((e, idx) => { %>
+            <tr class="border-b border-gray-100 hover:bg-gray-50">
+              <td class="py-4 px-2 font-bold text-gray-400">#<%= idx + 1 %></td>
+              <td class="py-4 px-2 font-mono font-bold"><%= e.applicant_code %></td>
+              <td class="py-4 px-2">
+                <span class="<%= e.score >= 70 ? 'text-green-600 font-bold' : 'text-yellow-600' %>"><%= Math.round(e.score) %>%</span>
+              </td>
+              <td class="py-4 px-2 text-sm"><%= e.criteria %></td>
+              <td class="py-4 px-2 text-sm text-gray-600"><%= e.reason?.substring(0, 80) || '-' %></td>
+              <td class="py-4 px-2 text-sm text-gray-500"><%= new Date(e.created_at).toLocaleDateString() %></td>
+              <td class="py-4 px-2">
+                <span class="font-mono text-xs text-gray-400 cursor-help" title="<%= e.verification_hash %>"><%= e.verification_hash?.substring(0, 12) || 'N/A' %>...</span>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <% } %>
+    </div>
+
+    <div class="mt-6 p-4 bg-gray-100 rounded-lg text-sm text-gray-600">
+      <i class="fas fa-info-circle mr-1"></i>
+      This public ledger is append-only. Each entry is timestamped and cryptographically hashed for integrity verification.
+    </div>
+    <% } %>
+  </div>
+
+  <footer class="bg-gray-800 text-gray-400 py-6 text-center mt-12">
+    <p>&copy; 2026 Haki Kenya. Transparency in Public Service Recruitment.</p>
+  </footer>
+</body>
+</html>

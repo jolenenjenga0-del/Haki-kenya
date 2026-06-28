@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haki Kenya - Transparent Recruitment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-green-700 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold"><i class="fas fa-balance-scale mr-2"></i>Haki Kenya</a>
+      <div class="space-x-4">
+        <% if (user) { %>
+          <span class="text-green-200"><%= user.name %></span>
+          <a href="/dashboard" class="hover:text-green-200">Dashboard</a>
+          <a href="/logout" class="hover:text-green-200">Logout</a>
+        <% } else { %>
+          <a href="/login" class="hover:text-green-200">Login</a>
+          <a href="/register" class="bg-white text-green-700 px-4 py-2 rounded-lg font-semibold hover:bg-green-100">Get Started</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-green-700 to-green-900 text-white py-20">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h1 class="text-5xl font-bold mb-6">Transparent. Fair. AI-Driven.</h1>
+      <p class="text-xl mb-8 text-green-100">Kenya's first AI-powered recruitment platform eliminating bias and corruption from public service hiring.</p>
+      <div class="flex justify-center gap-4">
+        <a href="/register" class="bg-yellow-500 text-green-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-400">
+          <i class="fas fa-user-plus mr-2"></i>Register as Applicant
+        </a>
+        <a href="/public/shortlist" class="border-2 border-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-white hover:text-green-700">
+          <i class="fas fa-list mr-2"></i>View Public Shortlists
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="py-16 max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      <div class="bg-white p-8 rounded-xl shadow-md text-center">
+        <div class="text-green-600 text-4xl mb-4"><i class="fas fa-robot"></i></div>
+        <h3 class="text-xl font-bold mb-2">AI Screening</h3>
+        <p class="text-gray-600">Candidates evaluated on skills and credentials only. No names, no bias.</p>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-md text-center">
+        <div class="text-green-600 text-4xl mb-4"><i class="fas fa-eye"></i></div>
+        <h3 class="text-xl font-bold mb-2">Public Shortlists</h3>
+        <p class="text-gray-600">Every shortlist is publicly visible with exact criteria used.</p>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-md text-center">
+        <div class="text-green-600 text-4xl mb-4"><i class="fas fa-link"></i></div>
+        <h3 class="text-xl font-bold mb-2">Unique Codes</h3>
+        <p class="text-gray-600">Recruiters see only your unique code, not your identity. Truly anonymous.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6 text-center">
+      <div class="bg-green-100 p-6 rounded-lg">
+        <div class="text-3xl font-bold text-green-700"><%= stats.jobs %></div>
+        <div class="text-gray-600">Open Positions</div>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg">
+        <div class="text-3xl font-bold text-green-700"><%= stats.applicants %></div>
+        <div class="text-gray-600">Registered Applicants</div>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg">
+        <div class="text-3xl font-bold text-green-700"><%= stats.placements %></div>
+        <div class="text-gray-600">AI-Shortlisted</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-800 text-gray-400 py-8 text-center">
+    <p>&copy; 2026 Haki Kenya. Transparency in Public Service Recruitment.</p>
+  </footer>
+</body>
+</html>

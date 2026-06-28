@@ -1,0 +1,76 @@
+ReferenceError: C:\Users\Samwel waweru\Documents\HAKI KENYA\views\dashboard.ejs:39
+    37|     </div>
+    38| 
+ >> 39|     <% if (req.query.applied) { %>
+    40|     <div class="bg-blue-100 text-blue-700 p-4 rounded-lg mb-6"><i class="fas fa-check-circle mr-2"></i>Application submitted successfully! The AI is reviewing your profile.</div>
+    41|     <% } %>
+    42| 
+
+req is not defined
+    at eval (eval at compile (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:673:12), <anonymous>:24:8)
+    at dashboard (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:703:17)
+    at tryHandleCache (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:274:36)
+    at exports.renderFile [as engine] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:491:10)
+    at View.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\view.js:135:8)
+    at tryRender (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:657:10)
+    at Function.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:609:3)
+    at ServerResponse.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\response.js:1049:7)
+    at C:\Users\Samwel waweru\Documents\HAKI KENYA\server.js:123:7
+    at Layer.handle [as handle_request] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\router\layer.js:95:5)
+ReferenceError: C:\Users\Samwel waweru\Documents\HAKI KENYA\views\dashboard.ejs:39
+    37|     </div>
+    38| 
+ >> 39|     <% if (req.query.applied) { %>
+    40|     <div class="bg-blue-100 text-blue-700 p-4 rounded-lg mb-6"><i class="fas fa-check-circle mr-2"></i>Application submitted successfully! The AI is reviewing your profile.</div>
+    41|     <% } %>
+    42| 
+
+req is not defined
+    at eval (eval at compile (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:673:12), <anonymous>:24:8)
+    at dashboard (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:703:17)
+    at tryHandleCache (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:274:36)
+    at exports.renderFile [as engine] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:491:10)
+    at View.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\view.js:135:8)
+    at tryRender (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:657:10)
+    at Function.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:609:3)
+    at ServerResponse.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\response.js:1049:7)
+    at C:\Users\Samwel waweru\Documents\HAKI KENYA\server.js:123:7
+    at Layer.handle [as handle_request] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\router\layer.js:95:5)
+ReferenceError: C:\Users\Samwel waweru\Documents\HAKI KENYA\views\dashboard.ejs:39
+    37|     </div>
+    38| 
+ >> 39|     <% if (applied) { %>
+    40|     <div class="bg-blue-100 text-blue-700 p-4 rounded-lg mb-6"><i class="fas fa-check-circle mr-2"></i>Application submitted successfully! The AI is reviewing your profile.</div>
+    41|     <% } %>
+    42| 
+
+applied is not defined
+    at eval (eval at compile (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:673:12), <anonymous>:24:8)
+    at dashboard (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:703:17)
+    at tryHandleCache (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:274:36)
+    at exports.renderFile [as engine] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:491:10)
+    at View.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\view.js:135:8)
+    at tryRender (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:657:10)
+    at Function.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:609:3)
+    at ServerResponse.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\response.js:1049:7)
+    at C:\Users\Samwel waweru\Documents\HAKI KENYA\server.js:123:7
+    at Layer.handle [as handle_request] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\router\layer.js:95:5)
+ReferenceError: C:\Users\Samwel waweru\Documents\HAKI KENYA\views\dashboard.ejs:39
+    37|     </div>
+    38| 
+ >> 39|     <% if (applied) { %>
+    40|     <div class="bg-blue-100 text-blue-700 p-4 rounded-lg mb-6"><i class="fas fa-check-circle mr-2"></i>Application submitted successfully! The AI is reviewing your profile.</div>
+    41|     <% } %>
+    42| 
+
+applied is not defined
+    at eval (eval at compile (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:673:12), <anonymous>:24:8)
+    at dashboard (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:703:17)
+    at tryHandleCache (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:274:36)
+    at exports.renderFile [as engine] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\ejs\lib\ejs.js:491:10)
+    at View.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\view.js:135:8)
+    at tryRender (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:657:10)
+    at Function.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\application.js:609:3)
+    at ServerResponse.render (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\response.js:1049:7)
+    at C:\Users\Samwel waweru\Documents\HAKI KENYA\server.js:123:7
+    at Layer.handle [as handle_request] (C:\Users\Samwel waweru\Documents\HAKI KENYA\node_modules\express\lib\router\layer.js:95:5)

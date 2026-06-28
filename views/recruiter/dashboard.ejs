@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Dashboard - Haki Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-green-700 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold"><i class="fas fa-balance-scale mr-2"></i>Haki Kenya</a>
+      <span class="text-sm bg-yellow-500 text-green-900 px-2 py-1 rounded font-bold">RECRUITER</span>
+      <div class="space-x-4">
+        <span><%= user.name %></span>
+        <a href="/recruiter/dashboard" class="hover:text-green-200"><i class="fas fa-home"></i></a>
+        <a href="/recruiter/jobs/create" class="hover:text-green-200"><i class="fas fa-plus"></i></a>
+        <a href="/logout" class="hover:text-green-200">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Recruiter Dashboard</h1>
+
+    <div class="grid grid-cols-4 gap-4 mb-8">
+      <div class="bg-white p-4 rounded-lg shadow text-center">
+        <div class="text-3xl font-bold text-green-700"><%= stats.total %></div>
+        <div class="text-gray-500 text-sm">Total Jobs</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow text-center">
+        <div class="text-3xl font-bold text-green-700"><%= stats.active %></div>
+        <div class="text-gray-500 text-sm">Active Jobs</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow text-center">
+        <div class="text-3xl font-bold text-green-700"><%= stats.totalApps %></div>
+        <div class="text-gray-500 text-sm">Applications</div>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow text-center">
+        <div class="text-3xl font-bold text-green-700"><%= stats.shortlisted %></div>
+        <div class="text-gray-500 text-sm">Shortlisted (AI)</div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold">My Job Listings</h2>
+      <a href="/recruiter/jobs/create" class="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800">
+        <i class="fas fa-plus mr-1"></i> Post New Job
+      </a>
+    </div>
+
+    <% if (jobs.length === 0) { %>
+      <div class="bg-white p-8 rounded-xl shadow text-center text-gray-500">
+        <i class="fas fa-briefcase text-4xl mb-3 text-gray-300"></i>
+        <p>No jobs posted yet.</p>
+        <a href="/recruiter/jobs/create" class="text-green-700 font-semibold mt-2 inline-block">Post your first job &rarr;</a>
+      </div>
+    <% } else { %>
+      <div class="space-y-3">
+        <% jobs.forEach(job => { %>
+        <div class="bg-white p-5 rounded-xl shadow flex justify-between items-center">
+          <div>
+            <h3 class="font-bold text-lg"><%= job.title %></h3>
+            <p class="text-gray-500 text-sm"><%= job.department %> | Status: <span class="<%= job.status === 'open' ? 'text-green-600' : 'text-red-600' %>"><%= job.status %></span></p>
+          </div>
+          <a href="/recruiter/jobs/<%= job.id %>" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
+            <i class="fas fa-users mr-1"></i> View Applicants
+          </a>
+        </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply - Haki Kenya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-green-700 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold"><i class="fas fa-balance-scale mr-2"></i>Haki Kenya</a>
+      <div class="space-x-4">
+        <a href="/dashboard" class="hover:text-green-200"><i class="fas fa-home"></i></a>
+        <a href="/jobs" class="hover:text-green-200"><i class="fas fa-briefcase"></i></a>
+        <a href="/logout" class="hover:text-green-200"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <div class="bg-white p-6 rounded-xl shadow mb-6">
+      <h1 class="text-2xl font-bold text-green-800"><%= job.title %></h1>
+      <p class="text-gray-500"><%= job.department %></p>
+      <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+        <h3 class="font-bold mb-2">Job Description</h3>
+        <p class="text-gray-700"><%= job.description %></p>
+        <h3 class="font-bold mt-4 mb-2">Requirements</h3>
+        <p class="text-gray-700"><%= job.requirements %></p>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h2 class="text-xl font-bold mb-4"><i class="fas fa-paper-plane text-green-600 mr-2"></i>Submit Application</h2>
+
+      <% if (error) { %><div class="bg-red-100 text-red-700 p-3 rounded mb-4"><%= error %></div><% } %>
+
+      <form method="POST">
+        <% if (docs && docs.length > 0) { %>
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2 font-semibold">Use uploaded CV for AI analysis:</label>
+          <select name="doc_id" class="w-full px-4 py-2 border rounded-lg">
+            <option value="">-- Type/paste CV text below instead --</option>
+            <% docs.forEach(doc => { %>
+            <option value="<%= doc.id %>"><%= doc.filename %></option>
+            <% }); %>
+          </select>
+        </div>
+        <% } %>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2 font-semibold">CV Text (paste or type):</label>
+          <textarea name="cv_text" rows="12" class="w-full px-4 py-2 border rounded-lg font-mono text-sm" placeholder="Paste your CV content here for AI analysis..."></textarea>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+          <p class="text-sm text-yellow-800"><i class="fas fa-robot mr-2"></i>The AI will analyze your CV against the job requirements and score you based on skills and qualifications only. Your identity is completely hidden from the recruiter.</p>
+        </div>
+
+        <button type="submit" class="w-full bg-green-700 text-white py-3 rounded-lg font-bold text-lg hover:bg-green-800">
+          <i class="fas fa-paper-plane mr-2"></i>Submit Application for AI Screening
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
