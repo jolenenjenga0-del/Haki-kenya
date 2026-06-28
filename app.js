@@ -308,4 +308,15 @@ app.get('/api/applications/:id/analysis', requireRole('recruiter'), (req, res) =
   });
 });
 
+app.get('/debug-error', (req, res) => {
+  res.json({
+    vercel: process.env.VERCEL,
+    cwd: process.cwd(),
+    node: process.version,
+    hasViews: require('fs').existsSync(require('path').join(process.env.VERCEL ? process.cwd() : __dirname, 'views')),
+    hasPublic: require('fs').existsSync(require('path').join(process.env.VERCEL ? process.cwd() : __dirname, 'public')),
+    env: Object.keys(process.env).filter(k => !k.includes('SECRET') && !k.includes('KEY') && !k.includes('TOKEN')).slice(0, 20)
+  });
+});
+
 module.exports = { app };
