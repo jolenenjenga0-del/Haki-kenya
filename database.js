@@ -2,12 +2,17 @@ const initSqlJs = require('sql.js');
 const fs = require('fs');
 const path = require('path');
 
-const DB_PATH = path.join(__dirname, 'haki_kenya.db');
+const isVercel = process.env.VERCEL === '1';
+const DB_PATH = isVercel ? '/tmp/haki_kenya.db' : path.join(__dirname, 'haki_kenya.db');
 let db = null;
 
 function saveDB() {
-  const data = db.export();
-  fs.writeFileSync(DB_PATH, Buffer.from(data));
+  try {
+    const data = db.export();
+    fs.writeFileSync(DB_PATH, Buffer.from(data));
+  } catch (err) {
+    console.warn('DB save skipped (read-only fs):', err.message);
+  }
 }
 
 const dbWrapper = {
@@ -33,13 +38,8 @@ const dbWrapper = {
         return rows;
       },
       run(...params) {
-        try {
-          db.run(sql, params);
-          saveDB();
-        } catch (err) {
-          console.error('DB error:', sql, params, err.message);
-          throw err;
-        }
+        db.run(sql, params);
+        saveDB();
       }
     };
   },
@@ -69,61 +69,35 @@ async function initDatabase() {
     phone TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
-
   db.run(`CREATE TABLE IF NOT EXISTS jobs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    description TEXT NOT NULL,
-    requirements TEXT NOT NULL,
-    department TEXT NOT NULL,
-    location TEXT,
-    recruiter_id INTEGER NOT NULL,
+    title TEXT NOT NULL, description TEXT NOT NULL, requirements TEXT NOT NULL,
+    department TEXT NOT NULL, location TEXT, recruiter_id INTEGER NOT NULL,
     status TEXT CHECK(status IN ('open','closed')) NOT NULL DEFAULT 'open',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
-
   db.run(`CREATE TABLE IF NOT EXISTS applicants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER UNIQUE NOT NULL,
-    bio TEXT,
-    skills TEXT,
-    education TEXT,
-    experience TEXT,
+    user_id INTEGER UNIQUE NOT NULL, bio TEXT, skills TEXT, education TEXT, experience TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
-
   db.run(`CREATE TABLE IF NOT EXISTS documents (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    applicant_id INTEGER NOT NULL,
-    filename TEXT NOT NULL,
-    content_text TEXT,
-    doc_type TEXT DEFAULT 'cv',
-    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    applicant_id INTEGER NOT NULL, filename TEXT NOT NULL, content_text TEXT,
+    doc_type TEXT DEFAULT 'cv', uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
-
   db.run(`CREATE TABLE IF NOT EXISTS applications (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    job_id INTEGER NOT NULL,
-    applicant_id INTEGER NOT NULL,
-    cv_text TEXT,
-    ai_score REAL DEFAULT 0,
-    ai_summary TEXT,
-    criteria_matched TEXT,
-    shortlisted INTEGER DEFAULT 0,
-    shortlist_reason TEXT,
-    blockchain_hash TEXT,
+    job_id INTEGER NOT NULL, applicant_id INTEGER NOT NULL, cv_text TEXT,
+    ai_score REAL DEFAULT 0, ai_summary TEXT, criteria_matched TEXT,
+    shortlisted INTEGER DEFAULT 0, shortlist_reason TEXT, blockchain_hash TEXT,
     status TEXT CHECK(status IN ('pending','reviewed','shortlisted','rejected')) DEFAULT 'pending',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
-
   db.run(`CREATE TABLE IF NOT EXISTS shortlist_public (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    job_id INTEGER NOT NULL,
-    applicant_code TEXT NOT NULL,
-    score REAL NOT NULL,
-    criteria TEXT NOT NULL,
-    reason TEXT,
-    verification_hash TEXT,
+    job_id INTEGER NOT NULL, applicant_code TEXT NOT NULL,
+    score REAL NOT NULL, criteria TEXT NOT NULL, reason TEXT, verification_hash TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
 
