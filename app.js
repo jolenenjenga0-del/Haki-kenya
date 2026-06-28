@@ -10,10 +10,12 @@ const { scoreCandidate, generateBlockchainHash } = require('./ai-engine');
 
 const app = express();
 
+const ROOT = process.env.VERCEL ? process.cwd() : __dirname;
 app.set('view engine', 'ejs');
+app.set('views', path.join(ROOT, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(ROOT, 'public')));
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'haki-kenya-dev-secret-2026',
@@ -22,7 +24,7 @@ app.use(session({
   cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
 }));
 
-const uploadDir = process.env.VERCEL ? '/tmp/uploads' : path.join(__dirname, 'uploads');
+const uploadDir = process.env.VERCEL ? '/tmp/uploads' : path.join(ROOT, 'uploads');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
