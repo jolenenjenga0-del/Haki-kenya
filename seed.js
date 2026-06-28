@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { initDatabase, db } = require('./database');
+const { db } = require('./database');
 const { scoreCandidate, generateBlockchainHash } = require('./ai-engine');
 
 async function runSeed(verbose) {

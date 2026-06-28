@@ -5,7 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-const { initDatabase, db } = require('./database');
+const { db } = require('./database');
 const { scoreCandidate, generateBlockchainHash } = require('./ai-engine');
 
 const app = express();
@@ -308,14 +308,4 @@ app.get('/api/applications/:id/analysis', requireRole('recruiter'), (req, res) =
   });
 });
 
-async function initApp() {
-  await initDatabase();
-  const userCount = db.prepare('SELECT COUNT(*) as c FROM users').get();
-  if (!userCount || userCount.c === 0) {
-    const seed = require('./seed');
-    await seed.runSeed(false);
-    console.log('Auto-seeded demo data.');
-  }
-}
-
-module.exports = { app, initApp };
+module.exports = { app };
